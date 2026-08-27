@@ -1,0 +1,10 @@
+{
+  "domain": "mtn_reg",
+  "name": "MTN-registrering",
+  "version": "0.1.0",
+  "documentation": "https://mtn-reg.no",
+  "requirements": ["aiohttp"],
+  "codeowners": ["@mtn-reg"],
+  "config_flow": true,
+  "iot_class": "cloud_polling"
+}
