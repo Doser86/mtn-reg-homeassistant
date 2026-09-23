@@ -8,6 +8,20 @@ SENSOR_TYPER = {
     "innsjekketIDag": "Innsjekket i dag",
     "innsjekket48t": "Innsjekket siste 48 timer",
     "innsjekketUke": "Innsjekket siste uke",
+    "kapasitet": "Kapasitet (maks)",
+    "inneNaa": "Personer inne nå",
+    "kapasitetProsent": "Kapasitet fylt",
+}
+
+# Egne ikoner/enheter for kapasitet-sensorene - resten bruker standard
+# account-group-ikon uten enhet.
+SENSOR_IKON_OVERSTYRING = {
+    "kapasitet": "mdi:account-multiple",
+    "inneNaa": "mdi:account-check",
+    "kapasitetProsent": "mdi:gauge",
+}
+SENSOR_ENHET_OVERSTYRING = {
+    "kapasitetProsent": "%",
 }
 
 
@@ -23,7 +37,9 @@ class MtnRegSensor(CoordinatorEntity, SensorEntity):
         self._nokkel = nokkel
         self._attr_name = f"MTN-reg {navn}"
         self._attr_unique_id = f"{entry.entry_id}_{nokkel}"
-        self._attr_icon = "mdi:account-group"
+        self._attr_icon = SENSOR_IKON_OVERSTYRING.get(nokkel, "mdi:account-group")
+        if nokkel in SENSOR_ENHET_OVERSTYRING:
+            self._attr_native_unit_of_measurement = SENSOR_ENHET_OVERSTYRING[nokkel]
 
     @property
     def native_value(self):
